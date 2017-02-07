@@ -133,7 +133,7 @@ async function index_streams() {
   return await db.none(query);
 }
 
-db.task(index_streams)
+db.tx(index_streams)
   .then((results) => {
     console.log('processed succesfully')
     process.exit(-1);
