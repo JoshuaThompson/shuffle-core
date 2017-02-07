@@ -71,7 +71,7 @@ async function get_streams() {
   }
 }
 
-async function index_streams() {
+async function index_streams(t) {
   let streams = await get_streams();
 
   streams = _.uniqBy(streams, (stream) => {
@@ -106,9 +106,9 @@ async function index_streams() {
               views = EXCLUDED.views,
               followers = EXCLUDED.followers`;
 
-  await db.none(query);
+  await t.none(query);
 
-  await db.none('UPDATE streams SET online = false');
+  await t.none('UPDATE streams SET online = false');
 
   const streams_to_upsert = streams.map((stream) => {
     stream.stream_id = stream._id;
@@ -130,7 +130,7 @@ async function index_streams() {
               preview = EXCLUDED.preview,
               online = EXCLUDED.online`;
 
-  return await db.none(query);
+  return await t.none(query);
 }
 
 db.tx(index_streams)
