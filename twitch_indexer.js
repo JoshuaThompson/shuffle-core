@@ -2,6 +2,7 @@
 
 const axios = require('axios');
 const dbinfo = require('./db');
+const _ = require('lodash');
 
 const db = dbinfo.db;
 const pgp = dbinfo.pgp;
@@ -52,18 +53,17 @@ const twitch_axios = axios.create({
 async function get_streams() {
   try {
     let streams = [];
-    const stream_summary = await twitch_axios.get(`/streams/summary`);
-    let requests_required = Math.ceil(stream_summary.data.channels / 100);
-    
-    if (stream_summary.data.channels % 100 !== 0) {
-      requests_required += 1;
-    }
+    let i = 0;
+    let total = 100;
 
-    for (let i = 0; i < requests_required; i++) {
+    do {
       const next_streams = await twitch_axios.get(`/streams?limit=100&offset=${i*100}`);
       streams = streams.concat(next_streams.data.streams);
+      i++;
+      total = next_streams.data._total;
       await timeout(1000);
     }
+    while (i*100 <= total)
 
     return streams;
   } catch (err) {
@@ -72,14 +72,20 @@ async function get_streams() {
 }
 
 async function index_streams() {
-  const streams = await get_streams();
+  let streams = await get_streams();
+
+  streams = _.uniqBy(streams, (stream) => {
+    return stream._id;
+  });
   
-  const channels = streams.map((stream) => {
+  let channels = streams.map((stream) => {
     const channel = stream.channel;
     channel.channel_id = channel._id;
 
     return channel;
   });
+
+  channels = _.uniqBy(channels, 'channel_id');
 
   let query = pgp.helpers.insert(channels, channel_column_set);
   query += ` ON CONFLICT (channel_id) DO UPDATE SET 
@@ -129,7 +135,7 @@ async function index_streams() {
 
 db.task(index_streams)
   .then((results) => {
-    console.log('success!');
+    console.log('processed succesfully')
     process.exit(-1);
   })
   .catch((err) => {
