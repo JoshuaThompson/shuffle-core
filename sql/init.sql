@@ -1,7 +1,7 @@
-DROP DATABASE nomad;
-CREATE DATABASE nomad;
+DROP DATABASE shuffle;
+CREATE DATABASE shuffle;
 
-\connect nomad;
+\connect shuffle;
 
 CREATE TABLE channels (
   id SERIAL PRIMARY KEY,
