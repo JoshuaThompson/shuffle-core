@@ -108,7 +108,7 @@ def get_all_streams():
     index_offset += 1
     total = next_streams.get('_total', 0)
 
-    time.sleep(1)
+    time.sleep(1.5)
 
   return streams
 

@@ -1,0 +1,21 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #19171c;
+}
+
+.hero-body {
+    padding: 2.2rem 1.5rem !important;
+}
+
+.is-twitch-theme {
+    background-color: #6441a5 !important;
+}
+
+.github-link {
+    float: right;
+    font-size: 1.6em;
+}

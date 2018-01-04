@@ -1,0 +1,39 @@
+<!doctype html>
+<head>
+    <title>Twitch Shuffle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shuffle.css') }}" />
+</head>
+<body>
+    <section class="hero is-link is-twitch-theme">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <p class="title">Twitch Shuffle</p>
+                    </div>
+                    <div class="column">
+                        <a class="github-link" href="https://github.com/joshuathompson/shuffle">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-10">
+
+                </div>
+                <div class="column is-2">
+                    <button class="button is-link is-twitch-theme">Shuffle</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/shuffle.js') }}"></script>
+</body>

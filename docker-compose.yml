@@ -1,6 +1,15 @@
 version: '3.1'
 
 services:
+  app:
+    build: ./app
+    depends_on:
+      - "db"
+    restart: always
+    env_file:
+      - vars.env
+    ports:
+      - "5000:5000"
   stream_retriever:
     build: ./stream_retriever
     depends_on:
