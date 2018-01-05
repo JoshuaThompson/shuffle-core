@@ -13,7 +13,7 @@ function shuffleButtonPress() {
 
 function renderStreamAndChat(data) {
     $('.stream').html(`
-        <iframe src="http://player.twitch.tv/?channel=${data.name}&muted=true"
+        <iframe src="http://player.twitch.tv/?channel=${data.name}"
             height="100%"
             width="100%"
             frameborder="0"
