@@ -80,6 +80,11 @@ a {
     min-height: 150px;
 }
 
+.stream-title-link:hover {
+    text-decoration: underline;
+    text-decoration-color: #fff;
+}
+
 .stream-status {
     display: flex;
     align-items: center;

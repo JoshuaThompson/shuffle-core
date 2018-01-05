@@ -89,11 +89,20 @@ insert_streams_template = """
 """
 
 def get_streams(limit, offset):
-  headers = {
-    'Accept': 'application/vnd.twitchtv.v5+json',
-    'Client-ID': client_id
-  }
-  r = requests.get(f'https://api.twitch.tv/kraken/streams?limit={limit}&offset={offset}', headers=headers)
+  try:
+    headers = {
+      'Accept': 'application/vnd.twitchtv.v5+json',
+      'Client-ID': client_id
+    }
+    r = requests.get(f'https://api.twitch.tv/kraken/streams?limit={limit}&offset={offset}', headers=headers)
+
+    if r.status_code == 429:
+      time.sleep(60)
+      return get_streams(limit, offset)
+  except requests.exceptions.ChunkedEncodingError:
+    #Requests seems to be struggling at times https://github.com/requests/requests/issues/4248
+    time.sleep(1)
+    return get_streams(limit, offset)
 
   return r.json()
 
@@ -108,7 +117,14 @@ def get_all_streams():
     index_offset += 1
     total = next_streams.get('_total', 0)
 
-    time.sleep(1.5)
+    if len(streams) > 0:
+      last_stream_current = streams[len(streams)-1]
+
+      #since we only show streams with >= 5 on frontend, stop getting streams once they are small
+      if last_stream_current.get('viewers', 0) <= 5:
+        return streams
+
+    time.sleep(1)
 
   return streams
 
@@ -130,9 +146,14 @@ while True:
 
   conn = psycopg2.connect(host=host, port=port, dbname=dbname, user=user, password=password)
   cur = conn.cursor()
+  
+  cur.execute("SET LOCAL statement_timeout = '15s';")
 
   print('Clearing old data from database...')
-  cur.execute('TRUNCATE channels RESTART IDENTITY CASCADE;')
+  cur.execute('DELETE FROM streams;')
+  cur.execute('DELETE FROM channels;')
+  cur.execute('ALTER SEQUENCE streams_id_seq RESTART WITH 1;')
+  cur.execute('ALTER SEQUENCE channels_id_seq RESTART WITH 1;')
 
   print('Saving streams to database...')
   psycopg2.extras.execute_values(cur, insert_channels_query, channels, insert_channels_template, 1000)

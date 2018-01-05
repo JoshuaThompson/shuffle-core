@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shuffle.css') }}" />
 </head>
 <body>
@@ -47,7 +48,7 @@
                                 <option value="es">Español</option>
                             </select>
                             <div class="pretty p-icon p-smooth">
-                                <input type="checkbox" />
+                                <input class="no-high-viewer-streams" type="checkbox" checked />
                                 <div class="state p-success">
                                     <i class="icon fa fa-check"></i>
                                     <label class="ck-label">No high-viewer streams</label>

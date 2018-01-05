@@ -1,25 +1,38 @@
 $(document).ready(function() {
     $('.language-select').select2();
 
-    $.post( "/get-matching-streams", function(data) {
-        $('.stream').html(`<iframe
-            src="http://player.twitch.tv/?channel=${data.name}&muted=true"
+    $(".shuffle-button").click(shuffleButtonPress)
+    shuffleButtonPress()
+});
+
+function shuffleButtonPress() {
+    language = $('.language-select').val()
+    no_high_viewer_streams = $('.no-high-viewer-streams').is(':checked')
+    $.post( "/get-matching-streams", { language: language, no_high_viewer_streams: no_high_viewer_streams }, renderStreamAndChat);
+}
+
+function renderStreamAndChat(data) {
+    $('.stream').html(`
+        <iframe src="http://player.twitch.tv/?channel=${data.name}&muted=true"
             height="100%"
             width="100%"
             frameborder="0"
             scrolling="no"
             allowfullscreen="true">
-        </iframe>`)
+        </iframe>
+    `)
 
-        $('.chat').html(`<iframe frameborder="0"
-            scrolling="yes"
-            id="${data.name}"
-            src="http://www.twitch.tv/${data.name}/chat?darkpopout"
-            height="100%"
-            width="100%">
-        </iframe>`)
+        $('.chat').html(`
+            <iframe frameborder="0"
+                scrolling="yes"
+                id="${data.name}"
+                src="http://www.twitch.tv/${data.name}/chat?darkpopout"
+                height="100%"
+                width="100%">
+            </iframe>
+        `)
 
-        $('.stream-title').html(`<h1 class="title">${data.name}</h1>`)
+        $('.stream-title').html(`<a class="stream-title-link" href="http://www.twitch.tv/${data.name}"><h1 class="title">${data.name}</h1></a>`)
         $('.stream-status').html(`
             <div>
                 <img class="logo" src="${data.logo}" />
@@ -39,5 +52,4 @@ $(document).ready(function() {
                 </div>
             </div>
         `)
-    });
-});
+}

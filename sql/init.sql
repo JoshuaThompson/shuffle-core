@@ -33,4 +33,4 @@ CREATE TABLE streams (
   is_playlist BOOLEAN
 );
 
-CREATE UNIQUE INDEX stream_id_channel_id_created_at_index ON streams(stream_id, channel_id, created_at)
+CREATE UNIQUE INDEX stream_id_channel_id_created_at_index ON streams(stream_id, channel_id, created_at);
