@@ -2,19 +2,25 @@
 <head>
     <title>Twitch Shuffle</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shuffle.css') }}" />
 </head>
 <body>
-    <section class="hero is-link is-twitch-theme">
+    <section class="hero is-twitch-theme">
         <div class="hero-body">
             <div class="container">
-                <div class="columns is-vcentered">
+                <div class="columns is-vcentered header-columns">
                     <div class="column">
                         <p class="title">Twitch Shuffle</p>
+                        <p class="subtitle">Simple stream discovery</p>
                     </div>
                     <div class="column">
-                        <a class="github-link" href="https://github.com/joshuathompson/shuffle">
+                        <a class="fa-link" href="https://www.twitch.tv/">
+                            <i class="fa fa-twitch" aria-hidden="true"></i>
+                        </a>
+                        <a class="fa-link" href="https://github.com/joshuathompson/shuffle">
                             <i class="fa fa-github" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -24,16 +30,44 @@
     </section>
     <section class="section">
         <div class="container">
-            <div class="columns">
-                <div class="column is-10">
-
+            <div class="columns stream-content">
+                <div class="column is-12-tablet is-9-desktop">
+                    <div class="columns is-multiline">
+                        <div class="column is-12-tablet is-8-desktop">
+                            <div class="columns is-multiline">
+                                <div class="column is-12 stream-title">
+                                </div>
+                                <div class="column is-12 stream-status">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4-desktop is-12-tablet controls">
+                            <select class="language-select" name="language">
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                            </select>
+                            <div class="pretty p-icon p-smooth">
+                                <input type="checkbox" />
+                                <div class="state p-success">
+                                    <i class="icon fa fa-check"></i>
+                                    <label class="ck-label">No high-viewer streams</label>
+                                </div>
+                            </div>
+                            <button class="button is-twitch-theme shuffle-button">
+                                <i class="fa fa-random" aria-hidden="true"></i>
+                                <span class="shuffle-button-text">Shuffle</span>
+                            </button>
+                        </div>
+                        <div class="column is-12 stream">
+                        </div>
+                    </div>
                 </div>
-                <div class="column is-2">
-                    <button class="button is-link is-twitch-theme">Shuffle</button>
+                <div class="column is-12-tablet is-3-desktop chat">
                 </div>
             </div>
         </div>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/shuffle.js') }}"></script>
 </body>

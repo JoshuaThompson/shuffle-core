@@ -6,10 +6,10 @@ services:
     depends_on:
       - "db"
     restart: always
-    env_file:
-      - vars.env
     ports:
       - "5000:5000"
+    env_file:
+      - vars.env
   stream_retriever:
     build: ./stream_retriever
     depends_on:

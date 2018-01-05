@@ -1,21 +1,165 @@
 html {
     height: 100%;
+    background-color: #19171c;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-body {
-    height: 100%;
-    background-color: #19171c;
+a {
+    color: #fff;
 }
 
 .hero-body {
-    padding: 2.2rem 1.5rem !important;
+    padding: 1.3rem 1.5rem;
+}
+
+.title {
+    color: #fff;
+}
+
+.subtitle {
+    color: #fff;
 }
 
 .is-twitch-theme {
-    background-color: #6441a5 !important;
+    background-color: #6441a5;
+    color: #fff;
+    border: none;
 }
 
-.github-link {
+.fa-link {
     float: right;
     font-size: 1.6em;
+    padding-left: .5rem;
+}
+
+.fa-link:hover {
+    color: #19171c;
+}
+
+.fa-link::before {
+    content: none;
+}
+
+.stream-content .column {
+    background: #201c2b!important
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.shuffle-button {
+    width: 100%;
+}
+
+.ck-label {
+    color: #fff;
+}
+
+.shuffle-button:active {
+    background: #6441a5;
+    color: #fff;
+}
+
+.shuffle-button:hover, .shuffle-button:focus {
+    background: #7d5bbe;
+    color: #fff;
+}
+
+.shuffle-button-text {
+    padding-left: .2rem;
+}
+
+.controls {
+    min-height: 150px;
+}
+
+.stream-status {
+    display: flex;
+    align-items: center;
+}
+
+.stream-status > div:not(:first-child) {
+    padding-left: 1rem;
+}
+
+.logo {
+    max-height: 80px;
+}
+
+.status-text {
+    margin-bottom: 0 !important;
+}
+
+.stats > .tw-stat:not(:first-child) {
+    padding-left: .5rem;
+}
+
+.tw-stat {
+    display: inline;
+}
+
+.tw-svg {
+    display: inline-block;
+    vertical-align: middle;
+    fill: #898395
+}
+
+.tw-stat__value {
+    color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+    .header-columns {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stream-content {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 576px) {
+    .stream {
+        height: 290px;
+    }
+
+    .chat {
+        height: 390px;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    .stream {
+        height: 390px;
+    }
+
+    .chat {
+        height: 490px;
+    }
+}
+
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .stream {
+        height: 490px;
+    }
+
+    .chat {
+        height: 490px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .stream {
+        height: 588px;
+    }
 }
