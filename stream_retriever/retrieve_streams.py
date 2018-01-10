@@ -94,7 +94,7 @@ def get_streams(limit, offset):
       'Accept': 'application/vnd.twitchtv.v5+json',
       'Client-ID': client_id
     }
-    r = requests.get(f'https://api.twitch.tv/kraken/streams?limit={limit}&offset={offset}', headers=headers)
+    r = requests.get(f'https://api.twitch.tv/kraken/streams?limit={limit}&offset={offset}', headers=headers, timeout=5)
 
     if r.status_code == 429:
       time.sleep(60)
