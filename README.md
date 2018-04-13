@@ -1,6 +1,6 @@
 # Twitch Shuffle
 
-Source for [twitchshuffle.com](http://twitchshuffle.com).  The purpose of the website is to allow you to find low viewership streams at random.
+The purpose of the website is to allow you to find low viewership streams at random.
 
 ## How to run
 * Install Docker and Docker-Compose.  
